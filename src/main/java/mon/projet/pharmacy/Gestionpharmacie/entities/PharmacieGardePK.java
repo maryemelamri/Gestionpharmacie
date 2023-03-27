@@ -1,8 +1,10 @@
 package mon.projet.pharmacy.Gestionpharmacie.entities;
 
+import jakarta.persistence.Embeddable;
+
 import java.io.Serializable;
 import java.util.Date;
-
+@Embeddable
 public class PharmacieGardePK implements Serializable {
 
     private int id_pharmacie;

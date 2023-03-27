@@ -1,27 +1,82 @@
 package mon.projet.pharmacy.Gestionpharmacie.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Pharmacie {
     @Id
-    private int id_phar;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-    public int getId_phar() {
-        return id_phar;
+    private String nom;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "zone_id")
+    @JsonBackReference
+    private Zone zone;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
+
+    @ManyToMany
+    @JoinTable(name = "pharmacie_garde", joinColumns = @JoinColumn(name = "id_pharmacie"), inverseJoinColumns = @JoinColumn(name = "id_garde"))
+    @JsonManagedReference
+    private List<Garde> gardes;
+
+    private String adress;
+    private double lat;
+    private double lag;
+    private String photo;
+    private int status;
+
+    public Pharmacie() {
+        super();
     }
 
-    public void setId_phar(int id_phar) {
-        this.id_phar = id_phar;
+
+    public int getId() {
+        return id;
     }
 
-    public String getNom_phar() {
-        return nom_phar;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setNom_phar(String nom_phar) {
-        this.nom_phar = nom_phar;
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public Zone getZone() {
+        return zone;
+    }
+
+    public void setZone(Zone zone) {
+        this.zone = zone;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<Garde> getGardes() {
+        return gardes;
+    }
+
+    public void setGardes(List<Garde> gardes) {
+        this.gardes = gardes;
     }
 
     public String getAdress() {
@@ -63,17 +118,4 @@ public class Pharmacie {
         this.photo = photo;
     }
 
-    private String nom_phar;
-
-    public Pharmacie() {
-    }
-
-    private String adress;
-    private double lat;
-    private double lag;
-    private String photo;
-
-
-
-    private int status;
 }

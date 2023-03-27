@@ -1,23 +1,31 @@
 package mon.projet.pharmacy.Gestionpharmacie.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Garde {
    @Id
-    private int ind_garde;
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   private int id_garde;
     private String type;
 
+    @ManyToMany(mappedBy = "gardes")
+    @JsonBackReference
+    private List<Pharmacie> pharmacies;
+
     public Garde() {
+        super();
     }
 
     public int getInd_garde() {
-        return ind_garde;
+        return id_garde;
     }
 
-    public void setInd_garde(int ind_garde) {
-        this.ind_garde = ind_garde;
+    public void setInd_garde(int id_garde) {
+        this.id_garde = id_garde;
     }
 
     public String getType() {

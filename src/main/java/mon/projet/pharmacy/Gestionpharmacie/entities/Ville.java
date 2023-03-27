@@ -1,31 +1,41 @@
 package mon.projet.pharmacy.Gestionpharmacie.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Ville {
     @Id
-    private int id_ville;
-    private String nom_ville;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private String nom;
 
-    public Ville() {
-
+    public List<Zone> getZones() {
+        return zones;
     }
 
-    public int getId_ville() {
-        return id_ville;
+    public void setZones(List<Zone> zones) {
+        this.zones = zones;
     }
 
-    public void setId_ville(int id_ville) {
-        this.id_ville = id_ville;
+    @OneToMany(mappedBy = "ville")
+    private List<Zone> zones;
+
+    public int getId() {
+        return id;
     }
 
-    public String getNom_ville() {
-        return nom_ville;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setNom_ville(String nom_ville) {
-        this.nom_ville = nom_ville;
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 }
