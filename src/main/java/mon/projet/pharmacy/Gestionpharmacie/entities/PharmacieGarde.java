@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.util.Date;
 @Entity
+@Table(name="pharmacie_garde")
 public class PharmacieGarde {
     @EmbeddedId
     private PharmacieGardePK pk;
