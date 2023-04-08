@@ -12,9 +12,7 @@ public class Garde {
    private int id_garde;
     private String type;
 
-    @ManyToMany(mappedBy = "gardes")
-    @JsonBackReference
-    private List<Pharmacie> pharmacies;
+
 
     public Garde() {
         super();

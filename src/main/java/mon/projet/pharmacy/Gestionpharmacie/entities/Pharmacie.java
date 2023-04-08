@@ -14,19 +14,12 @@ public class Pharmacie {
 
     private String nom;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "zone_id")
-    @JsonBackReference
+    @ManyToOne
     private Zone zone;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private User user;
-
-    @ManyToMany
-    @JoinTable(name = "pharmacie_garde", joinColumns = @JoinColumn(name = "id_pharmacie"), inverseJoinColumns = @JoinColumn(name = "id_garde"))
-    @JsonManagedReference
-    private List<Garde> gardes;
 
     private String adress;
     private double lat;
@@ -71,13 +64,9 @@ public class Pharmacie {
         this.user = user;
     }
 
-    public List<Garde> getGardes() {
-        return gardes;
-    }
 
-    public void setGardes(List<Garde> gardes) {
-        this.gardes = gardes;
-    }
+
+
 
     public String getAdress() {
         return adress;
