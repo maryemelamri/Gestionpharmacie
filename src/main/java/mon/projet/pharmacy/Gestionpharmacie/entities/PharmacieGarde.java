@@ -8,7 +8,7 @@ import java.util.Date;
 public class PharmacieGarde {
     @EmbeddedId
     private PharmacieGardePK pk;
-    @Temporal(TemporalType.DATE)
+
     private Date dateFin;
     @ManyToOne
     @JoinColumn(name="id_pharmacie",insertable = false,updatable = false)
@@ -20,6 +20,8 @@ public class PharmacieGarde {
     private Garde garde;
 
     public PharmacieGarde(){super();}
+
+
 
     public PharmacieGardePK getPk() {
         return pk;
