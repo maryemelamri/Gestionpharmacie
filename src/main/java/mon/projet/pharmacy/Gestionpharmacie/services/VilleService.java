@@ -4,7 +4,7 @@ import mon.projet.pharmacy.Gestionpharmacie.entities.Ville;
 import mon.projet.pharmacy.Gestionpharmacie.repository.VilleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
+
 
 import java.util.List;
 

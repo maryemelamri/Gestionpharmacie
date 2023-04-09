@@ -13,6 +13,13 @@ public class PharmacieGardePK implements Serializable {
 
     public PharmacieGardePK(){super();}
 
+    public PharmacieGardePK(int id_pharmacie, int id_garde, Date dateDebut) {
+        super();
+        this.id_pharmacie = id_pharmacie;
+        this.id_garde = id_garde;
+        this.dateDebut = dateDebut;
+    }
+
     public int getId_pharmacie() {
         return id_pharmacie;
     }
