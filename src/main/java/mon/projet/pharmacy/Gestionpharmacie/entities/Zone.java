@@ -21,6 +21,7 @@ public class Zone {
     private String nom;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ville_id")
+    @JsonIgnore
     private Ville ville;
 
 
