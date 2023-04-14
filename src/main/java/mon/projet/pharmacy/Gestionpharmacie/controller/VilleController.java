@@ -33,6 +33,11 @@ private VilleRepository villeRepository;
         return villeService.findAll();
     }
 
+    @GetMapping("/villes/{id}")
+    public Ville getId(@PathVariable int id){
+        Ville v= villeService.findById(id);
+      return v;
+    }
 
         @GetMapping("/{nom}/zones")
     public List<Zone> findByVille(@PathVariable String nom) {

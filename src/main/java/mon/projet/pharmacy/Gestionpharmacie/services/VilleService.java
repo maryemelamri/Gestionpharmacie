@@ -24,4 +24,8 @@ public  class VilleService {
     public Ville findByNom(String nom) {
         return villeRepository.findByNom(nom);
     }
+
+    public Ville findById(int id) {
+        return villeRepository.findById(id);
+    }
 }
