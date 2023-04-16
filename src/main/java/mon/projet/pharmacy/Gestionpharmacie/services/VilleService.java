@@ -28,4 +28,7 @@ public  class VilleService {
     public Ville findById(int id) {
         return villeRepository.findById(id);
     }
+    public void delete(int id ){
+        villeRepository.delete(villeRepository.findById(id));
+    }
 }

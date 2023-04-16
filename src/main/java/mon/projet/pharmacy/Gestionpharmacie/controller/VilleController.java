@@ -27,6 +27,21 @@ private VilleRepository villeRepository;
     public void save(@RequestBody Ville ville){
         villeService.save(ville);
     }
+
+    @PutMapping("api/{id}")
+    public void updateCity(@PathVariable int id, @RequestBody Ville ville) {
+        Ville existingCity = villeService.findById(id);
+        if (existingCity != null) {
+            existingCity.setNom(ville.getNom());
+            villeService.save(existingCity);
+        }
+
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteCity(@PathVariable int id) {
+        villeService.delete(id);
+    }
     //getAll
     @GetMapping("/villes")
     public List<Ville> findAll(){
