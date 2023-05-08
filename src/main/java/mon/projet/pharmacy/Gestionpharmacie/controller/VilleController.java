@@ -13,22 +13,22 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api")
+@RequestMapping("/api/villes")
 public class VilleController {
 @Autowired
-    private VilleService villeService;
+private VilleService villeService;
 @Autowired
 private ZoneService zoneService;
 
 @Autowired
 private VilleRepository villeRepository;
     //add one
-    @PostMapping("api/save")
+    @PostMapping("/save")
     public void save(@RequestBody Ville ville){
-        villeService.save(ville);
+         villeService.save(ville);
     }
 
-    @PutMapping("api/{id}")
+    @PutMapping("/update/{id}")
     public void updateCity(@PathVariable int id, @RequestBody Ville ville) {
         Ville existingCity = villeService.findById(id);
         if (existingCity != null) {
@@ -38,17 +38,17 @@ private VilleRepository villeRepository;
 
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteCity(@PathVariable int id) {
         villeService.delete(id);
     }
     //getAll
-    @GetMapping("/villes")
+    @GetMapping("")
     public List<Ville> findAll(){
         return villeService.findAll();
     }
 
-    @GetMapping("/villes/{id}")
+    @GetMapping("/{id}")
     public Ville getId(@PathVariable int id){
         Ville v= villeService.findById(id);
       return v;
@@ -61,7 +61,7 @@ private VilleRepository villeRepository;
 
     }
 
-    @GetMapping("/villes/{nom}/zones/{nom2}/pharmacies")
+    @GetMapping("/{nom}/zones/{nom2}/pharmacies")
     public List<Pharmacie> findByPharmacie(@PathVariable String nom, @PathVariable String nom2){
         Ville v = villeService.findByNom(nom);//marrkech
         Zone z = zoneService.findByNom(nom2);//massirq

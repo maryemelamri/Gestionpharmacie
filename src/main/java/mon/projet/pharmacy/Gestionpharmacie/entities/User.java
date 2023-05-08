@@ -1,44 +1,108 @@
 package mon.projet.pharmacy.Gestionpharmacie.entities;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name="user")
-public class User {
+public class User implements UserDetails {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String email;
+    private  String username;
+    private String password;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Collection<Role> authorities;
+
+    private boolean accountNonLocked=true;
+    private boolean credentialsNonExpired=true;
+    private boolean accountNonExpired=true;
+    private boolean enabled=true;
+
 
     public User() {
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String email;
-    private  String userName;
-    private String password;
-    @OneToMany(mappedBy = "user")
-    private List<Pharmacie> pharmacie;
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "users_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "id_role")
-    )
-    private Set<Role> roles = new HashSet<>();
-
-    public void addRole(Role role) {
-        this.roles.add(role);
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
+    public Long getId() {
+        return id;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+
+    @Override
+    public Collection<Role> getAuthorities() {return authorities;}
+
+    public void setAuthorities(Collection<Role> authorities) {
+        this.authorities = authorities;
+    }
+
+
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public String getUsername() {
+        return null;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    public void setAccountNonLocked(boolean accountNonLocked) {
+        this.accountNonLocked = accountNonLocked;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    public void setAccountNonExpired(boolean accountNonExpired) {
+        this.accountNonExpired = accountNonExpired;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+        this.credentialsNonExpired = credentialsNonExpired;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public String getEmail() {
@@ -49,37 +113,14 @@ public class User {
         this.email = email;
     }
 
-    public String getUserName() {
-        return userName;
+    @OneToMany(mappedBy = "user")
+    private List<Pharmacie> pharmacie;
+
+    public List<Pharmacie> getPharmacie() {
+        return pharmacie;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getTelephone() {
-        return telephone;
-    }
-
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
-    }
-
-    private String telephone;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public void setPharmacie(List<Pharmacie> pharmacie) {
+        this.pharmacie = pharmacie;
     }
 }

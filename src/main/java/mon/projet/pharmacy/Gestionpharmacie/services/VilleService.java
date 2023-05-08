@@ -13,7 +13,7 @@ public  class VilleService {
     @Autowired
     private VilleRepository villeRepository;
     public void save( Ville ville){
-        villeRepository.save(ville);
+         villeRepository.save(ville);
     }
 
     public List<Ville> findAll(){
