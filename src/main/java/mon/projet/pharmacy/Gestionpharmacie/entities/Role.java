@@ -1,24 +1,26 @@
 package mon.projet.pharmacy.Gestionpharmacie.entities;
 
 import jakarta.persistence.*;
-import org.springframework.security.core.GrantedAuthority;
 
-import java.util.Collection;
 import java.util.List;
 
-@Entity
-@Table(name="role")
-public class Role implements GrantedAuthority {
+
+public class Role {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Long id;
-    private String authority;
-    private  String nom_role;
-    private String description;
+    private int id_role;
 
-    public Role() {
+    private  String role;
+
+    public String getRole() {
+        return role;
     }
 
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    private String description;
 
     public String getDescription() {
         return description;
@@ -29,24 +31,13 @@ public class Role implements GrantedAuthority {
         this.description = description;
     }
 
-    public Long getId() {
-        return id;
+    public int getId_role() {
+        return id_role;
     }
 
-    public void setId(Long id_role) {
-        this.id = id_role;
+    public void setId_role(int id_role) {
+        this.id_role = id_role;
     }
 
-    public String getNom_role() {
-        return nom_role;
-    }
 
-    public void setNom_role(String nom_role) {
-        this.nom_role = nom_role;
-    }
-
-    @Override
-    public String getAuthority() {
-        return null;
-    }
 }
