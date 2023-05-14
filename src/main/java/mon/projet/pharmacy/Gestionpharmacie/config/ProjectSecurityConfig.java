@@ -29,7 +29,7 @@ public class ProjectSecurityConfig {
          */
         http.authorizeRequests(authorize -> authorize
                         .requestMatchers(
-                                new AntPathRequestMatcher("/api")
+                                new AntPathRequestMatcher("/api/villes")
                         ).authenticated()
                         .requestMatchers("/pharmacie").permitAll()
                 )
@@ -99,7 +99,7 @@ public class ProjectSecurityConfig {
 
     @Bean
     public AuthenticationSuccessHandler authenticationSuccessHandler() {
-        return new SimpleUrlAuthenticationSuccessHandler("/myAccount");
+        return new SimpleUrlAuthenticationSuccessHandler("/");
     }
 
     @Bean

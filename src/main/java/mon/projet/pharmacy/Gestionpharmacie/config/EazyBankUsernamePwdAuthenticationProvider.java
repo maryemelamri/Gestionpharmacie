@@ -32,15 +32,20 @@ public class EazyBankUsernamePwdAuthenticationProvider implements Authentication
 		String username = authentication.getName();
 		String pwd = authentication.getCredentials().toString();
 		List<User> user = userRepository.findByEmail(username);
+		System.out.println("*********** "+ username);
 		if (user.size() > 0) {
+			System.out.println("im here"+ username);
 			if (passwordEncoder.matches(pwd, user.get(0).getPwd())) {
+				System.out.println("tani hna"+ username);
 				List<GrantedAuthority> authorities = new ArrayList<>();
 				authorities.add(new SimpleGrantedAuthority(user.get(0).getRole()));
 				return new UsernamePasswordAuthenticationToken(username, pwd, authorities);
 			} else {
+				System.out.println("Invalid"+ username);
 				throw new BadCredentialsException("Invalid password!");
 			}
 		}else {
+			System.out.println("No user registered "+ username);
 			throw new BadCredentialsException("No user registered with this details!");
 		}
 	}

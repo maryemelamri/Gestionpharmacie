@@ -10,10 +10,24 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class LoginController {
 
+
+
+
+        @RequestMapping("/login")
+        public String loginPage(){
+            return "auth-login";
+        }
+
+        @RequestMapping("/city")
+        public String loginSubmit(){
+            return "/pages/city";
+        }
+/*
     @Autowired
     private EazyBankUsernamePwdAuthenticationProvider authProvider;
 
@@ -35,5 +49,5 @@ public class LoginController {
         }
 
         return "redirect:/";
-    }
+    }*/
 }
