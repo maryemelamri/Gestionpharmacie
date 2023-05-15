@@ -14,17 +14,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class LoginController {
-
-
-
-
         @RequestMapping("/login")
         public String loginPage(){
             return "auth-login";
         }
 
-        @RequestMapping("/city")
+        @RequestMapping("/home")
         public String loginSubmit(){
+            return "/pages/landing_page";
+        }
+        @RequestMapping("/city")
+        public String city(){
             return "/pages/city";
         }
 /*
