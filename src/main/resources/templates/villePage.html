@@ -147,7 +147,7 @@
             </div>
             <div class="card-body px-0 pb-0">
               <div class="table-responsive">
-                <table th:action="@{/login}"class='table mb-0' id="table1">
+                <table class='table mb-0' id="table1">
                   <thead>
                   <tr>
                     <th>id</th>
@@ -157,18 +157,9 @@
                   </thead>
                   <tbody >
                   <tr th:each="ville : ${entities}">
-                      <td th:text="${ville.id}"></td>
-                      <td th:text="${ville.nom}"></td>
-                    <td>
-                      <form th:action="@{/api/ville/delete/{id}(id=${ville.id})}" method="delete">
-                        <input type="hidden" name="_method" value="delete" />
-                        <button type="submit">Delete Entity</button>
-                      </form>
-
-                      <a th:href="@{api/ville/delete/{id}(id=${ville.id})}">Delete</a>
-                    </td>
+                    <td th:text="${ville.id}"></td>
+                    <td th:text="${ville.nom}"></td>
                   </tr>
-                  </tbody>
                   </tbody>
                 </table>
               </div>

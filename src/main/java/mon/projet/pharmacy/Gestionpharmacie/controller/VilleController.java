@@ -1,34 +1,44 @@
 package mon.projet.pharmacy.Gestionpharmacie.controller;
 
-import mon.projet.pharmacy.Gestionpharmacie.entities.Garde;
-import mon.projet.pharmacy.Gestionpharmacie.entities.Pharmacie;
-import mon.projet.pharmacy.Gestionpharmacie.entities.Ville;
-import mon.projet.pharmacy.Gestionpharmacie.entities.Zone;
+import mon.projet.pharmacy.Gestionpharmacie.entities.*;
 import mon.projet.pharmacy.Gestionpharmacie.repository.VilleRepository;
+import mon.projet.pharmacy.Gestionpharmacie.repository.YourEntityRepository;
 import mon.projet.pharmacy.Gestionpharmacie.services.VilleService;
 import mon.projet.pharmacy.Gestionpharmacie.services.ZoneService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("api")
+@RequestMapping("api/ville")
 public class VilleController {
+
+
+
+
 @Autowired
+    private VilleRepository villerepo;
+    @Autowired
     private VilleService villeService;
 @Autowired
 private ZoneService zoneService;
+    @Autowired // or use constructor injection
+    public VilleController(VilleRepository villeRepository) {
+        this.villerepo = villeRepository;
+    }
 
-@Autowired
-private VilleRepository villeRepository;
+
     //add one
-    @PostMapping("api/save")
+    @PostMapping("/save")
     public void save(@RequestBody Ville ville){
         villeService.save(ville);
     }
 
-    @PutMapping("api/{id}")
+    @PutMapping("/update/{id}")
     public void updateCity(@PathVariable int id, @RequestBody Ville ville) {
         Ville existingCity = villeService.findById(id);
         if (existingCity != null) {
@@ -39,17 +49,28 @@ private VilleRepository villeRepository;
     }
 
 
+//    @DeleteMapping("/delete/{id}")
+//    public void delete(@PathVariable(required = true) String id) {
+//        Ville ville = villerepo.findById(Integer.parseInt(id));
+//        System.out.println("sssssssssssssssss"+ville.getNom());
+//        villerepo.delete(ville);
+//    }
+
     @DeleteMapping("/{id}")
     public void deleteCity(@PathVariable int id) {
-        villeService.delete(id);
+        Ville exist = villeService.findById(id);
+        if(exist != null){
+            villeService.delete(exist);
+        }
+        villeService.deleteCity(id);
     }
     //getAll
-    @GetMapping("/villes")
+    @GetMapping("/all")
     public List<Ville> findAll(){
         return villeService.findAll();
     }
 
-    @GetMapping("/villes/{id}")
+    @GetMapping("/get/{id}")
     public Ville getId(@PathVariable int id){
         Ville v= villeService.findById(id);
       return v;
@@ -87,4 +108,31 @@ public List<Garde> findByGarde(@PathVariable String ville, @PathVariable String 
 
         return null;
 }
+
+
+
+    @GetMapping("/v2")
+    public String city(Model model){
+
+        model.addAttribute("listVilles", villeService.findAll());
+        return "/pages/city";
+    }
+    @RequestMapping("/v1")
+public String viewPage(Model model){
+        List<Ville> entities = villeService.findAll();
+        model.addAttribute("listVilles", entities);
+        System.out.println(entities+" dddddddd "+ entities.toString());
+        System.out.println(entities);
+        return "villePage";
+
+    }
+
+
+    @RequestMapping("/v3")
+    public String displayTable(Model model) {
+        List<Ville> entities = villerepo.findAll();
+        model.addAttribute("entities", entities);
+        System.out.println(entities+" dddddddd "+ entities.toString());
+        return "test";
+    }
 }

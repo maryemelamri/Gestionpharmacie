@@ -4,11 +4,17 @@ import jakarta.persistence.*;
 
 import java.util.List;
 
-
+@Entity
 public class Role {
+
+    public Role() {
+    }
+
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int id_role;
+    @Column(name = "role_id")
+
+    private int id;
 
     private  String role;
 
@@ -32,11 +38,11 @@ public class Role {
     }
 
     public int getId_role() {
-        return id_role;
+        return id;
     }
 
     public void setId_role(int id_role) {
-        this.id_role = id_role;
+        this.id = id_role;
     }
 
 

@@ -28,7 +28,16 @@ public  class VilleService {
     public Ville findById(int id) {
         return villeRepository.findById(id);
     }
-    public void delete(int id ){
-        villeRepository.delete(villeRepository.findById(id));
+//    public void delete(int id ){
+//        villeRepository.delete(villeRepository.findById(id));
+//    }
+public void deleteCity(int id) {
+    villeRepository.deleteById(id);
+}
+
+    public List <Ville> getAllVilles(){return  villeRepository.findAll();};
+
+    public void delete(Ville exist) {
+        villeRepository.delete(exist);
     }
 }

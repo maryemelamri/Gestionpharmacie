@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<tr th:each="entity : ${entities}">
+  <td th:text="${entity.id}"></td>
+  <td th:text="${entity.nom}"></td>
+</body>
+</html>

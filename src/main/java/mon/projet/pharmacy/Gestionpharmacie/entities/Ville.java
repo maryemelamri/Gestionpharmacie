@@ -3,9 +3,11 @@ package mon.projet.pharmacy.Gestionpharmacie.entities;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
+import java.util.Collection;
 import java.util.List;
 
 @Entity
+@Table(name = "ville")
 public class Ville {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +22,7 @@ public class Ville {
         this.zones = zones;
     }
 
-    @OneToMany(mappedBy = "ville")
+    @OneToMany(mappedBy = "ville", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Zone> zones;
 
     public int getId() {

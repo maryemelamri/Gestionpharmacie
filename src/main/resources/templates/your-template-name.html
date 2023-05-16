@@ -1,0 +1,14 @@
+<table>
+    <thead>
+    <tr>
+        <th>Column Name 1</th>
+        <th>Column Name 2</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="entity : ${entities}">
+        <td th:text="${entity.columnName1}"></td>
+        <td th:text="${entity.columnName2}"></td>
+    </tr>
+    </tbody>
+</table>
