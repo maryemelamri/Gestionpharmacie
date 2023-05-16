@@ -11,6 +11,7 @@ import java.util.List;
 @Repository
 public interface VilleRepository extends JpaRepository<Ville, Integer>{
     Ville findById(int id);
+    List<Ville> findAll();
 
     Ville findByNom(String nom);
 

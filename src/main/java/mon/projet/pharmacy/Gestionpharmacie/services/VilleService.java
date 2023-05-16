@@ -20,7 +20,7 @@ public  class VilleService {
         return villeRepository.findAll();
     }
 
-
+    public List <Ville> getAllVilles(){return  villeRepository.findAll();};
     public Ville findByNom(String nom) {
         return villeRepository.findByNom(nom);
     }
