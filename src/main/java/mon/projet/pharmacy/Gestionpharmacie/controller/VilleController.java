@@ -21,7 +21,12 @@ public class VilleController {
 private ZoneService zoneService;
 
 @Autowired
-private VilleRepository villeRepository;
+private VilleRepository villeRepo;
+
+    @Autowired // or use constructor injection
+    public VilleController(VilleRepository villeRepository) {
+        this.villeRepo = villeRepository;
+    }
     //add one
     @PostMapping("api/save")
     public void save(@RequestBody Ville ville){

@@ -1,22 +1,22 @@
 package mon.projet.pharmacy.Gestionpharmacie.controller;
 
-import mon.projet.pharmacy.Gestionpharmacie.config.EazyBankUsernamePwdAuthenticationProvider;
+import mon.projet.pharmacy.Gestionpharmacie.entities.Ville;
+import mon.projet.pharmacy.Gestionpharmacie.repository.VilleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Controller
 public class LoginController {
-        @RequestMapping("/login")
+    @Autowired
+    VilleRepository villeRepository;
+        @RequestMapping("login")
         public String loginPage(){
-            return "auth-login";
+            return "auth/auth-login";
         }
 
         @RequestMapping("/home")
@@ -24,7 +24,10 @@ public class LoginController {
             return "/pages/landing_page";
         }
         @RequestMapping("/city")
-        public String city(){
+        public String city(Model model){
+            List<Ville> entities = villeRepository.findAll();
+            model.addAttribute("entities", entities);
+            System.out.println(entities+" dddddddd "+ entities.toString());
             return "/pages/city";
         }
 /*
