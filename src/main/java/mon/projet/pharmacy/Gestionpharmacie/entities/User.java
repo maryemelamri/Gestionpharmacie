@@ -1,27 +1,116 @@
 package mon.projet.pharmacy.Gestionpharmacie.entities;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
-public class User {
+@Table(name="user")
+public class User implements UserDetails {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	private String email;
-	private String pwd;
+	private  String username;
+	private String password;
 	private String role;
-	@OneToMany(mappedBy = "user")
-	private List<Pharmacie> pharmacie;
+	public String getRole() {
+		return role;
+	}
 
-	public int getId() {
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	@ManyToMany(fetch = FetchType.EAGER)
+	private Collection<Role> authorities;
+
+	private boolean accountNonLocked=true;
+	private boolean credentialsNonExpired=true;
+	private boolean accountNonExpired=true;
+	private boolean enabled=true;
+
+
+	public User() {
+	}
+
+	public User(String username, String password) {
+		this.username = username;
+		this.password = password;
+	}
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
+	}
+
+
+	@Override
+	public Collection<Role> getAuthorities() {return authorities;}
+
+	public void setAuthorities(Collection<Role> authorities) {
+		this.authorities = authorities;
+	}
+
+
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	@Override
+	public String getUsername() {
+		return null;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return false;
+	}
+
+	public void setAccountNonLocked(boolean accountNonLocked) {
+		this.accountNonLocked = accountNonLocked;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return false;
+	}
+
+	public void setAccountNonExpired(boolean accountNonExpired) {
+		this.accountNonExpired = accountNonExpired;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return false;
+	}
+
+	public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+		this.credentialsNonExpired = credentialsNonExpired;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return false;
+	}
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 
 	public String getEmail() {
@@ -32,20 +121,15 @@ public class User {
 		this.email = email;
 	}
 
-	public String getPwd() {
-		return pwd;
+	@OneToMany(mappedBy = "user")
+	private List<Pharmacie> pharmacie;
+
+	public List<Pharmacie> getPharmacie() {
+		return pharmacie;
 	}
 
-	public void setPwd(String pwd) {
-		this.pwd = pwd;
-	}
-
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
+	public void setPharmacie(List<Pharmacie> pharmacie) {
+		this.pharmacie = pharmacie;
 	}
 
 }

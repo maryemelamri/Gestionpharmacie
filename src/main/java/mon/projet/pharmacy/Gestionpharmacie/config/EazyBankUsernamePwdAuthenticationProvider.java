@@ -35,11 +35,12 @@ public class EazyBankUsernamePwdAuthenticationProvider implements Authentication
 		System.out.println("*********** "+ username);
 		if (user.size() > 0) {
 			System.out.println("im here"+ username);
-			if (passwordEncoder.matches(pwd, user.get(0).getPwd())) {
+			if (passwordEncoder.matches(pwd, user.get(0).getPassword())) {
 				System.out.println("tani hna"+ username);
 				List<GrantedAuthority> authorities = new ArrayList<>();
 				authorities.add(new SimpleGrantedAuthority(user.get(0).getRole()));
 				return new UsernamePasswordAuthenticationToken(username, pwd, authorities);
+
 			} else {
 				System.out.println("Invalid"+ username);
 				throw new BadCredentialsException("Invalid password!");
@@ -52,6 +53,7 @@ public class EazyBankUsernamePwdAuthenticationProvider implements Authentication
 
 	@Override
 	public boolean supports(Class<?> authenticationType) {
+		System.out.println("my token ++++++"+UsernamePasswordAuthenticationToken.class);
 		return authenticationType.equals(UsernamePasswordAuthenticationToken.class);
 	}
 }
