@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api")
+@RequestMapping("Api/ville")
 public class VilleController {
 @Autowired
     private VilleService villeService;
@@ -28,12 +28,13 @@ private VilleRepository villeRepo;
         this.villeRepo = villeRepository;
     }
     //add one
-    @PostMapping("api/save")
+    @PostMapping("/save")
     public void save(@RequestBody Ville ville){
+        System.out.println("im here hani ");
         villeService.save(ville);
     }
 
-    @PutMapping("api/{id}")
+    @PutMapping("update/{id}")
     public void updateCity(@PathVariable int id, @RequestBody Ville ville) {
         Ville existingCity = villeService.findById(id);
         if (existingCity != null) {
@@ -44,17 +45,20 @@ private VilleRepository villeRepo;
     }
 
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteCity(@PathVariable int id) {
-        villeService.delete(id);
+
+        System.out.println("deleteeeeeeeeeeeeeeeeeeeeeeeee");villeService.delete(id);
     }
     //getAll
-    @GetMapping("/villes")
+    @GetMapping("/all")
     public List<Ville> findAll(){
+
+        System.out.println("api all dddddddd");
         return villeService.findAll();
     }
 
-    @GetMapping("/villes/{id}")
+    @GetMapping("/{id}")
     public Ville getId(@PathVariable int id){
         Ville v= villeService.findById(id);
       return v;
