@@ -14,6 +14,6 @@ public interface VilleRepository extends JpaRepository<Ville, Integer>{
     List<Ville> findAll();
 
     Ville findByNom(String nom);
-
+    Ville getVilleById(int id);
 
 }

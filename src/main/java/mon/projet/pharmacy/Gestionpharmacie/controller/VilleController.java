@@ -8,20 +8,21 @@ import mon.projet.pharmacy.Gestionpharmacie.repository.VilleRepository;
 import mon.projet.pharmacy.Gestionpharmacie.services.VilleService;
 import mon.projet.pharmacy.Gestionpharmacie.services.ZoneService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("Api/ville")
+@RequestMapping("api/ville")
 public class VilleController {
-@Autowired
-    private VilleService villeService;
-@Autowired
-private ZoneService zoneService;
 
-@Autowired
-private VilleRepository villeRepo;
+    @Autowired
+    private VilleService villeService;
+    @Autowired
+    private ZoneService zoneService;
+    @Autowired
+    private VilleRepository villeRepo;
 
     @Autowired // or use constructor injection
     public VilleController(VilleRepository villeRepository) {
@@ -30,41 +31,38 @@ private VilleRepository villeRepo;
     //add one
     @PostMapping("/save")
     public void save(@RequestBody Ville ville){
-        System.out.println("im here hani ");
         villeService.save(ville);
     }
 
-    @PutMapping("update/{id}")
-    public void updateCity(@PathVariable int id, @RequestBody Ville ville) {
+    @GetMapping("/update/{id}")
+    public String updateCity(@PathVariable int id, @RequestBody Ville ville) {
         Ville existingCity = villeService.findById(id);
         if (existingCity != null) {
             existingCity.setNom(ville.getNom());
             villeService.save(existingCity);
         }
-
+        return "/pages/updateville";
     }
 
 
-    @DeleteMapping("/delete/{id}")
-    public void deleteCity(@PathVariable int id) {
-
-        System.out.println("deleteeeeeeeeeeeeeeeeeeeeeeeee");villeService.delete(id);
+    @GetMapping("/delete/{id}")
+    public String deleteCity(@PathVariable (value = "id")  int id) {
+        villeService.delete(id);
+        return "redirect:/";
     }
     //getAll
     @GetMapping("/all")
     public List<Ville> findAll(){
-
-        System.out.println("api all dddddddd");
         return villeService.findAll();
     }
 
     @GetMapping("/{id}")
     public Ville getId(@PathVariable int id){
         Ville v= villeService.findById(id);
-      return v;
+        return v;
     }
 
-        @GetMapping("/{nom}/zones")
+    @GetMapping("/{nom}/zones")
     public List<Zone> findByVille(@PathVariable String nom) {
         Ville ville = villeService.findByNom(nom);
         return ville.getZones();
@@ -85,15 +83,28 @@ private VilleRepository villeRepo;
 
 
         }
-      return null;
+        return null;
     }
 
 
-public List<Garde> findByGarde(@PathVariable String ville, @PathVariable String zone, @PathVariable String garde ){
+
+
+//    @GetMapping("/update/{id}")
+//    public String updateCity(@PathVariable ( value = "id") int id, Model model) {
+//
+//        // get employee from the service
+//        Ville ville = villeService.getVilleById(id);
+//
+//        // set employee as a model attribute to pre-populate the form
+//        model.addAttribute("ville", ville);
+//        return "pages/updateville";
+//    }
+
+    public List<Garde> findByGarde(@PathVariable String ville, @PathVariable String zone, @PathVariable String garde ){
         Ville v = villeService.findByNom(ville);
         Zone z = zoneService.findByNom(zone);
 
 
         return null;
-}
+    }
 }

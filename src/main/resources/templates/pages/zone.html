@@ -1,68 +1,194 @@
-<script src="script/zone.js" type="text/javascript"></script>
-<div class="container-fluid">
-    <div class="modal fade" id="error" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Erreur</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Impossible de supprimer cette zone</p>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in - MyPharmacie</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+
+    <link rel="shortcut icon" th:href="@{/images/favicon.svg}" type="image/x-icon">
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+
+<body>
+<div id="auth">
+
+    <div class="main-content container-fluid" layout:fragment="content">
+        <div class="page-title">
+            <h3>Ville</h3>
+            <p class="text-subtitle text-muted">Liste Ville</p>
+        </div>
+        <section class="section">
+            <!--   <div class="row mb-2">
+                 <div class="col-12 col-md-3">
+                   <div class="card card-statistic">
+                     <div class="card-body p-0">
+                       <div class="d-flex flex-column">
+                         <div class='px-3 py-3 d-flex justify-content-between'>
+                           <h3 class='card-title'>BALANCE</h3>
+                           <div class="card-right d-flex align-items-center">
+                             <p>$50 </p>
+                           </div>
+                         </div>
+                         <div class="chart-wrapper">
+                           <canvas id="canvas1" style="height:100px !important"></canvas>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+                 <div class="col-12 col-md-3">
+                   <div class="card card-statistic">
+                     <div class="card-body p-0">
+                       <div class="d-flex flex-column">
+                         <div class='px-3 py-3 d-flex justify-content-between'>
+                           <h3 class='card-title'>Revenue</h3>
+                           <div class="card-right d-flex align-items-center">
+                             <p>$532,2 </p>
+                           </div>
+                         </div>
+                         <div class="chart-wrapper">
+                           <canvas id="canvas2" style="height:100px !important"></canvas>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+                 <div class="col-12 col-md-3">
+                   <div class="card card-statistic">
+                     <div class="card-body p-0">
+                       <div class="d-flex flex-column">
+                         <div class='px-3 py-3 d-flex justify-content-between'>
+                           <h3 class='card-title'>ORDERS</h3>
+                           <div class="card-right d-flex align-items-center">
+                             <p>1,544 </p>
+                           </div>
+                         </div>
+                         <div class="chart-wrapper">
+                           <canvas id="canvas3" style="height:100px !important"></canvas>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+                 <div class="col-12 col-md-3">
+                   <div class="card card-statistic">
+                     <div class="card-body p-0">
+                       <div class="d-flex flex-column">
+                         <div class='px-3 py-3 d-flex justify-content-between'>
+                           <h3 class='card-title'>Sales Today</h3>
+                           <div class="card-right d-flex align-items-center">
+                             <p>423 </p>
+                           </div>
+                         </div>
+                         <div class="chart-wrapper">
+                           <canvas id="canvas4" style="height:100px !important"></canvas>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+               </div>-->
+            <!--     ............... Start form Ajouter .................-->
+            <div id="popupContainer" style="display: none;" class="row">
+                <div class="col-sm-6 mb-2">
+                              <form action="#" th:action="@{/saveEmployee}" th:object="${employee}" method="POST" id="addForm">
+                                <label for="nom">Nom : </label>
+                                <input class="" type="text" id="id" hidden>
+                                <input class="form-control" type="text" id="nom" required>
+                              </form>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="card bg-white">
-        <div class="card-header card-color">
-            <p class="h2 text-center text-uppercase font-weight-bold pt-2">Gestion des zones</p>
-        </div>
-        <div class="card-body container-fluid">
-            <div class="row">
-                <div class="col-sm-6 mb-2">
-                    <label for="nom">Nom : </label>
-                    <input class="" type="text" id="id" hidden>
-                    <input class="form-control" type="text" id="nom" required>
-                </div>
-               
-                
-                <div class="col-sm-6 mb-2">
-                    <label for="ville">Ville : </label>
-                     
-                     <select  class="form-control"  id="ville" name="ville">
-                     	<option value="0">choisir une option</option>
-                     	
-                     </select>
-             </div>
-                
-            </div>
-           
+            <!--     ............... END form Ajouter .................-->
+            <!--     ............... Start form Ajouter event .................-->
             <div class="row">
                 <div class="col">
                     <button type="button" class="btn btn-outline-success mt-3 mb-3" id="btn">Ajouter</button>
                 </div>
             </div>
-            <div class="row table-responsive m-auto rounded">
-                <table id="tzone" class="table table-hover w-100">
-                    <thead>
-                        <tr class="text-uppercase bg-light  w-100">
-                            <th scope="col">Id</th>
-                            <th scope="col">Nom</th>
-                           
-                            <th scope="col">Ville</th>
-                            <th scope="col">Supprimer</th>
-                            <th scope="col">Modifier</th>
-                        </tr>
-                    </thead>
-                    <tbody id="table-content">
+            <!--     ............... END form Ajouter event .................-->
 
-                    </tbody>
-                </table>
-            </div>
-        </div>
+            <!--strat popup ajouter -->
 
+
+
+
+            <script th:inline="javascript">
+                document.getElementById('btn').addEventListener('click', function() {
+                    document.getElementById('popupContainer').style.display = 'block';
+                });
+
+                document.getElementById('addForm').addEventListener('submit', function(event) {
+                    event.preventDefault();
+                    // Add logic to handle form submission and AJAX request to add the data
+                    // You can use JavaScript libraries like Axios or fetch for making AJAX requests
+                    // After successfully adding the data, you can close the popup or perform any other actions as needed
+                    document.getElementById('popupContainer').style.display = 'none';
+                });
+            </script>
+
+            <!--end popup ajouter -->
+
+            <!--     ............... START List   .................-->
+            <div class="row mb-4">
+                <div class="col-md-8">
+                      <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h4 class="card-title">YOUR LIST</h4>
+                            <div class="d-flex ">
+                                <i data-feather="download"></i>
+                            </div>
+                        </div>
+                        <div class="card-body px-0 pb-0">
+                            <div class="table-responsive">
+                                <table class="table mb-0" id="table1">
+                                    <thead>
+                                    <tr>
+                                        <th>id</th>
+                                        <th>Nom ville</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="ville : ${entities}">
+                                        <td th:text="${ville.id}"></td>
+                                        <td th:text="${ville.nom}"></td>
+                                        <td>
+                                            <form id="deleteForm" th:action="@{/Api/ville/delete/9}" method="post">
+                                                <input type="hidden" name="_method" value="DELETE">
+                                                <button type="button" onclick="deleteVille()">Delete</button>
+                                            </form>
+
+                                            <script th:inline="javascript">
+                                                function deleteVille() {
+                                                    if (confirm('Are you sure you want to delete this ville?')) {
+                                                        var form = document.getElementById('deleteForm');
+                                                        form.setAttribute('method', 'DELETE');
+                                                        form.submit();
+                                                    }
+                                                }
+                                            </script>
+                                            <a th:href="@{/showFormForUpdate/{id}(id=${ville.id})}" class="btn btn-primary">Update</a>
+                                            <a th:href="@{/Api/ville/delete/{id}(id=${ville.id})}" class="btn btn-danger">Delete</a>
+
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+                            <!--     ............... END List   .................-->
+        </section>
     </div>
 </div>
+</body>
+
+<script th:src="@{/js/feather.min.js}"></script>
+<script th:src="@{/js/app.js}"></script>
+
+<script th:src="@{/js/main.js}"></script>
+</body>
+
+</html>
