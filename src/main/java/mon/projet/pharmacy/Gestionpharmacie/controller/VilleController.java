@@ -34,7 +34,7 @@ public class VilleController {
         villeService.save(ville);
     }
 
-    @GetMapping("/update/{id}")
+    @PutMapping("/update/{id}")
     public String updateCity(@PathVariable int id, @RequestBody Ville ville) {
         Ville existingCity = villeService.findById(id);
         if (existingCity != null) {
@@ -45,7 +45,7 @@ public class VilleController {
     }
 
 
-    @GetMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public String deleteCity(@PathVariable (value = "id")  int id) {
         villeService.delete(id);
         return "redirect:/";
@@ -89,16 +89,6 @@ public class VilleController {
 
 
 
-//    @GetMapping("/update/{id}")
-//    public String updateCity(@PathVariable ( value = "id") int id, Model model) {
-//
-//        // get employee from the service
-//        Ville ville = villeService.getVilleById(id);
-//
-//        // set employee as a model attribute to pre-populate the form
-//        model.addAttribute("ville", ville);
-//        return "pages/updateville";
-//    }
 
     public List<Garde> findByGarde(@PathVariable String ville, @PathVariable String zone, @PathVariable String garde ){
         Ville v = villeService.findByNom(ville);

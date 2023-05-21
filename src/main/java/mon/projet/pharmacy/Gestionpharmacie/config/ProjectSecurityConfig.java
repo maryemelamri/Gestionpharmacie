@@ -29,7 +29,7 @@ public class ProjectSecurityConfig {
          */
         http.authorizeRequests(authorize -> authorize
                         .requestMatchers(
-                                new AntPathRequestMatcher("/api/villes")
+                                new AntPathRequestMatcher("/")
                         ).authenticated()
                         .requestMatchers("/pharmacie").permitAll()
                 )
