@@ -11,12 +11,12 @@ public class PharmacieGarde {
 
     private Date dateFin;
     @ManyToOne
-    @JoinColumn(name="id_pharmacie",insertable = false,updatable = false)
+    @JoinColumn(name="pharmacie_id",insertable = false,updatable = false)
     private Pharmacie pharmacie;
 
 
     @ManyToOne
-    @JoinColumn(name="id_garde",insertable = false,updatable = false)
+    @JoinColumn(name="garde_id",insertable = false,updatable = false)
     private Garde garde;
 
     public PharmacieGarde(){super();}

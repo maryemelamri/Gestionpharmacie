@@ -35,13 +35,12 @@ public class VilleController {
     }
 
     @PutMapping("/update/{id}")
-    public String updateCity(@PathVariable int id, @RequestBody Ville ville) {
+    public void updateCity(@PathVariable int id, @RequestBody Ville ville) {
         Ville existingCity = villeService.findById(id);
-        if (existingCity != null) {
+        if (existingCity != null)
             existingCity.setNom(ville.getNom());
             villeService.save(existingCity);
-        }
-        return "/pages/updateville";
+
     }
 
 

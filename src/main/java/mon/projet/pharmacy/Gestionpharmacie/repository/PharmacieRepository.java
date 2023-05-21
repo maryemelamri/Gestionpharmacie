@@ -12,5 +12,6 @@ public interface PharmacieRepository extends JpaRepository<Pharmacie, Integer> {
     Pharmacie findById(int id);
 
     Pharmacie findByZone(Zone zone);
+    void delete(Pharmacie pharmacie);
 
 }
