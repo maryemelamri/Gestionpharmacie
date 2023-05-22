@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/garde")
+@CrossOrigin
 public class GardeController {
 @Autowired
     private GardeService gardeService;

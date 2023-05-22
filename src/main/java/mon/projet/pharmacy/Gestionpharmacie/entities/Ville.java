@@ -22,7 +22,6 @@ public class Ville {
     }
 
     @OneToMany(fetch = FetchType.EAGER , mappedBy = "ville")
-    @JsonIgnore
     private List<Zone> zones;
 
     public int getId() {

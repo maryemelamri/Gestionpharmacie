@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/pharmacie")
+@CrossOrigin
 public class PharmacieController {
 @Autowired
 PharmacieService pharmacieService;

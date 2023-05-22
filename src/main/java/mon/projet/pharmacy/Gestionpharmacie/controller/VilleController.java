@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("api/ville")
 public class VilleController {
 
@@ -44,7 +45,7 @@ public class VilleController {
     }
 
 
-    @DeleteMapping("/delete/{id}")
+                                                @DeleteMapping("/delete/{id}")
     public String deleteCity(@PathVariable (value = "id")  int id) {
         villeService.delete(id);
         return "redirect:/";

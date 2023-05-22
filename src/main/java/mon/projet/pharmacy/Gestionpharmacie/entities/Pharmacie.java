@@ -32,6 +32,7 @@ public class Pharmacie {
     private String photo;
     private int status;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "pharmacie")
+    @JsonIgnore
     private List<PharmacieGarde> phramcieGarde;
 
     public Pharmacie() {

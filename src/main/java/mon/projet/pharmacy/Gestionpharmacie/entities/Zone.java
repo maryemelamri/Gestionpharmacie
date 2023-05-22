@@ -16,13 +16,13 @@ public class Zone {
     private int id;
 
     @OneToMany(fetch = FetchType.EAGER , mappedBy = "zone")
-    @JsonIgnore
     private List<Pharmacie> pharmacie;
 
 
     private String nom;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ville")
+    @JsonIgnore
     private Ville ville;
 
     public Ville getVille() {
