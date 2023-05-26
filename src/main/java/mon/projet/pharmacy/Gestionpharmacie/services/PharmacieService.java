@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
+
 @Service
 public class PharmacieService {
 
@@ -20,4 +22,6 @@ public class PharmacieService {
     public List<Pharmacie> findAll() {
        return pharmcieRepository.findAll();
     }
-}
+
+    }
+

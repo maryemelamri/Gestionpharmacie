@@ -27,12 +27,11 @@ public class ProjectSecurityConfig {
         /**
          * Custom configurations as per our requirement
          */
-
-        http.csrf().disable() .authorizeRequests(authorize -> authorize
+        http.authorizeRequests(authorize -> authorize
                         .requestMatchers(
-                                new AntPathRequestMatcher("/Pharmacie/all")
+                                new AntPathRequestMatcher("/")
                         ).authenticated()
-                        .requestMatchers("/Api/ville/delete/6?_method=DELETE").permitAll()
+                        .requestMatchers("/pharmacie").permitAll()
                 )
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login")

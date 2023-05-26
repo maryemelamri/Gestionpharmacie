@@ -1,5 +1,6 @@
 package mon.projet.pharmacy.Gestionpharmacie.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
@@ -20,7 +21,7 @@ public class Ville {
         this.zones = zones;
     }
 
-    @OneToMany(mappedBy = "ville")
+    @OneToMany(fetch = FetchType.EAGER , mappedBy = "ville")
     private List<Zone> zones;
 
     public int getId() {

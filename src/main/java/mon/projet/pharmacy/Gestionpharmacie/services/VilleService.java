@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public  class VilleService {
@@ -20,7 +21,7 @@ public  class VilleService {
         return villeRepository.findAll();
     }
 
-    public List <Ville> getAllVilles(){return  villeRepository.findAll();};
+    //public List <Ville> getAllVilles(){return  villeRepository.findAll();};
     public Ville findByNom(String nom) {
         return villeRepository.findByNom(nom);
     }
@@ -31,4 +32,17 @@ public  class VilleService {
     public void delete(int id ){
         villeRepository.delete(villeRepository.findById(id));
     }
+
+    public Ville getVilleById(int id) {
+        Ville  ville = villeRepository.findById(id);
+        
+        return ville;
+    }
+    public List<Ville> getAllVilles() {
+        // Code pour récupérer toutes les villes de votre source de données (par exemple, une base de données)
+        List<Ville> villes = villeRepository.findAll();
+
+        return villes;
+    }
+
 }

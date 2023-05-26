@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 
 import java.util.List;
 
-@JsonIgnoreProperties("ph")
+
 @Entity
 @Table(name = "zone")
 public class Zone {
@@ -15,15 +15,15 @@ public class Zone {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToMany(mappedBy = "zone")
-    private List<Pharmacie> ph;
+    @OneToMany(fetch = FetchType.EAGER , mappedBy = "zone")
+    private List<Pharmacie> pharmacie;
+
 
     private String nom;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ville_id")
+    @JoinColumn(name = "ville")
     @JsonIgnore
     private Ville ville;
-
 
     public Ville getVille() {
         return ville;
@@ -50,11 +50,11 @@ public class Zone {
     }
 
     public List<Pharmacie> getPh() {
-        return ph;
+        return pharmacie;
     }
 
     public void setPh(List<Pharmacie> ph) {
-        this.ph = ph;
+        this.pharmacie = ph;
     }
 
 

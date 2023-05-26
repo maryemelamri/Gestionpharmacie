@@ -1,6 +1,7 @@
 package mon.projet.pharmacy.Gestionpharmacie.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
@@ -15,22 +16,35 @@ public class Pharmacie {
     private String nom;
 
     @ManyToOne
+    @JsonIgnore
     private Zone zone;
 
 
+
     @ManyToOne
+    @JsonIgnore
     private User user;
 
     private String adress;
     private double lat;
+
     private double lag;
     private String photo;
     private int status;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "pharmacie")
+    @JsonIgnore
+    private List<PharmacieGarde> phramcieGarde;
 
     public Pharmacie() {
         super();
     }
+    public List<PharmacieGarde> getPhramcieGarde() {
+        return phramcieGarde;
+    }
 
+    public void setPhramcieGarde(List<PharmacieGarde> phramcieGarde) {
+        this.phramcieGarde = phramcieGarde;
+    }
 
     public int getId() {
         return id;

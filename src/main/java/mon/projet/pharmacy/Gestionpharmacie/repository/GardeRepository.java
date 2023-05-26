@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface GardeRepository extends JpaRepository<Garde, Integer> {
     Garde findByType(String type);
+    Garde findById(int id);
 }

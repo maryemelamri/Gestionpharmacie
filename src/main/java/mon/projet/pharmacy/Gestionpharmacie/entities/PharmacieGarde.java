@@ -1,5 +1,6 @@
 package mon.projet.pharmacy.Gestionpharmacie.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -11,12 +12,14 @@ public class PharmacieGarde {
 
     private Date dateFin;
     @ManyToOne
-    @JoinColumn(name="id_pharmacie",insertable = false,updatable = false)
+    @JsonIgnore
+    @JoinColumn(name="pharmacie_id",insertable = false,updatable = false)
     private Pharmacie pharmacie;
 
 
     @ManyToOne
-    @JoinColumn(name="id_garde",insertable = false,updatable = false)
+    @JsonIgnore
+    @JoinColumn(name="garde_id",insertable = false,updatable = false)
     private Garde garde;
 
     public PharmacieGarde(){super();}

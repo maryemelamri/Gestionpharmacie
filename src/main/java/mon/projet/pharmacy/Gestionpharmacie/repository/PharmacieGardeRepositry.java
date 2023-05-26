@@ -5,5 +5,6 @@ import mon.projet.pharmacy.Gestionpharmacie.entities.PharmacieGarde;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PharmacieGardeRepositry extends JpaRepository<PharmacieGarde, Integer> {
+    PharmacieGarde findById(int id);
 
 }
